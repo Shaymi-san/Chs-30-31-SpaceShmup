@@ -22,10 +22,8 @@ public class Hero : MonoBehaviour {
     // This variable holds a reference to the last triggering GameObject
     private GameObject lastTriggerGo = null;
 
-
-    //TODO: Add function delegate declaration
-
-
+    public delegate void WeaponFireDelegate();
+    public WeaponFireDelegate fireDelegate;
 
 	void Start()
     {
@@ -66,12 +64,14 @@ public class Hero : MonoBehaviour {
             TempFire();                                                   
         }
 
-        //TODO: Replace the TempFire call with the weapon delgate call
         // Use the fireDelegate to fire Weapons
         // First, make sure the button is pressed: Axis("Jump")
         // Then ensure that fireDelegate isn't null to avoid an error
 
-
+        if(Input.GetAxis("Jump") == 1 && fireDelegate != null)
+        {
+            fireDelegate();
+        }
 
     }
 
